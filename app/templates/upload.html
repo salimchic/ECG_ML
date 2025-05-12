@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EDF Upload</title>
+</head>
+<body>
+    <h1>Загрузите EDF-файл</h1>
+    
+    {% if error_message %}
+        <div style="color: red; margin-bottom: 20px;">{{ error_message }}</div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".edf" required>
+        <button type="submit">Загрузить</button>
+    </form>
+
+    {% if edf_data %}
+        <h2>Результаты:</h2>
+        <ul>
+            <li>Имя файла: {{ edf_data.filename }}</li>
+            <li>Количество каналов: {{ edf_data.channel_count }}</li>
+            <li>Частота дискретизации: {{ edf_data.sampling_freq }} Hz</li>
+            <li>Длительность: {{ edf_data.duration|round(2) }} сек</li>
+            <li>Метка времени: {{ edf_data.timestamp }}</li>
+        </ul>
+    {% endif %}
+</body>
+</html>
